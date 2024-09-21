@@ -38,6 +38,9 @@ pi_fan_size = 25; // [ 25: 25, 30: 30 ]
 // How to hold the screws, standoff creates an undersized hole for the screw to tap into, nutcatch creates a nutcatch on the base.
 screw_holding = "nutcatch"; // [ "nutcatch", "standoff" ]
 
+// Size of the bolt to use
+bolt = "M2.5";
+
 /* [Hidden] */
 
 board = [85, 56 , 1.3 ];  //dimension of rasp pi
@@ -550,14 +553,14 @@ module base() {
     if (screw_holding == "nutcatch") {
       translate([_t_wall + _rpi_padding, _t_wall + _rpi_padding]) {
         to_pi_mounts()
-          nutcatch_parallel("M3");
+          nutcatch_parallel(bolt);
 
       }
     }
   }
 
   if (screw_holding == "nutcatch" && hole_covers == true) {
-    translate([_t_wall+_rpi_padding,_t_wall+_rpi_padding,nut_height("M3") - 0.2]) {
+    translate([_t_wall+_rpi_padding,_t_wall+_rpi_padding,nut_height(bolt) - 0.2]) {
       to_pi_mounts()
         cylinder(r=_hole_inset_r+0.1,h=0.2);
     }
